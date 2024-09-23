@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-crud-hpa
+  labels:
+    app: fastapi-crud-hpa
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-crud-hpa
+  template:
+    metadata:
+      labels:
+        app: fastapi-crud-hpa
+    spec:
+      containers:
+      - name: fastapi-crud-hpa
+        image: jeck0v/fastapi-crud:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
